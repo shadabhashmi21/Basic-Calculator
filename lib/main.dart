@@ -25,3 +25,7 @@ class _BasicCalculatorState extends State<BasicCalculator> {
     );
   }
 }
+
+void calculate() {
+
+}
