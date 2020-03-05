@@ -108,10 +108,10 @@ class _BasicCalculatorState extends State<BasicCalculator> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  _button("C", /*_clear*/),
-                  _button("0", /*_zero*/),
-                  _button("=", /*_disp*/),
-                  _button("/", /*_div*/),
+                  _button("C"),
+                  _button("0"),
+                  _button("="),
+                  _button("/"),
                 ],
               ),
             ],
@@ -120,7 +120,7 @@ class _BasicCalculatorState extends State<BasicCalculator> {
       ),
     );
   }
-  Widget _button(String buttonText, /*Function() f*/){
+  Widget _button(String buttonText, ){
     return MaterialButton(
       height: 100.0,
       child: Text(buttonText,
