@@ -15,40 +15,36 @@ class _BasicCalculatorState extends State<BasicCalculator> {
   String operand = "";
 
   buttonPressed(String buttonText) {
-    if(buttonText == "C"){
-      _output = "0";
-      n1 = 0;
-      n2 = 0;
-      operand = "";
-    } else if (buttonText == "+" || buttonText == "-" || buttonText == "*" || buttonText == "/"){
-      n1 = double.parse(output);
-      operand = buttonText;
-      _output = "0";
-    } else if (buttonText == "=") {
-      n2 = double.parse(output);
-      if(operand == "+"){
-        _output = (n1 + n2).toString();
-      }
-      if(operand == "-"){
-        _output = (n1 - n2).toString();
-      }
-      if(operand == "*"){
-        _output = (n1 * n2).toString();
-      }
-      if(operand == "/"){
-        _output = (n1 / n2).toString();
-      }
-      n1 = 0;
-      n2 = 0;
-      operand = "";
-    } else {
-      _output = _output + buttonText;
+    switch (buttonText) {
+      case "C":
+        reset();
+        break;
+      case "+":
+        evaluate(buttonText);
+        break;
+      case "-":
+        evaluate(buttonText);
+        break;
+      case "*":
+        evaluate(buttonText);
+        break;
+      case "/":
+        evaluate(buttonText);
+        break;
+      case "=":
+        n2 = double.parse(output);
+        calculate(operand);
+        break;
+      default:
+        _output = _output + buttonText;
+        break;
     }
     print(_output);
     setState(() {
       output = double.parse(_output).toString();
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -66,15 +62,14 @@ class _BasicCalculatorState extends State<BasicCalculator> {
             children: <Widget>[
               Container(
                 constraints: BoxConstraints.expand(
-                  height: Theme.of(context).textTheme.display1.fontSize * 1.1 + 100.0,
+                  height: Theme.of(context).textTheme.display1.fontSize * 1.1 +
+                      100.0,
                 ),
                 alignment: Alignment.bottomRight,
                 color: Colors.white,
-                child: Text(output,
-                style: TextStyle(
-                  fontSize: 50,
-                  color: Colors.black
-                ),
+                child: Text(
+                  output,
+                  style: TextStyle(fontSize: 50, color: Colors.black),
                   textAlign: TextAlign.right,
                 ),
               ),
@@ -120,14 +115,48 @@ class _BasicCalculatorState extends State<BasicCalculator> {
       ),
     );
   }
-  Widget _button(String buttonText, ){
+
+  Widget _button(String buttonText) {
     return MaterialButton(
       height: 100.0,
       child: Text(buttonText,
-      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0)),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0)),
       textColor: Colors.black,
       color: Colors.grey[100],
       onPressed: () => buttonPressed(buttonText),
     );
+  }
+
+  reset() {
+    _output = "0";
+    n1 = 0;
+    n2 = 0;
+    operand = "";
+  }
+
+  calculate(String operand) {
+    switch (operand) {
+      case "+":
+        _output = (n1 + n2).toString();
+        break;
+      case "-":
+        _output = (n1 - n2).toString();
+        break;
+      case "*":
+        _output = (n1 * n2).toString();
+        break;
+      case "/":
+        _output = (n1 / n2).toString();
+        break;
+    }
+    n1 = 0;
+    n2 = 0;
+    operand = "";
+  }
+
+  evaluate(buttonText) {
+    n1 = double.parse(output);
+    operand = buttonText;
+    _output = "0";
   }
 }
