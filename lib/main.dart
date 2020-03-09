@@ -33,7 +33,6 @@ class _BasicCalculatorState extends State<BasicCalculator> {
         break;
       case "=":
         n2 = double.parse(output);
-        //calculate(operand);
         _output = calculate(operator, n1, n2);
         break;
       default:
