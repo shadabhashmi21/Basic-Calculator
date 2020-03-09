@@ -12,7 +12,7 @@ class _BasicCalculatorState extends State<BasicCalculator> {
   String _output = "0";
   double n1 = 0;
   double n2 = 0;
-  String operand = "";
+  String operator = "";
 
   buttonPressed(String buttonText) {
     switch (buttonText) {
@@ -33,7 +33,8 @@ class _BasicCalculatorState extends State<BasicCalculator> {
         break;
       case "=":
         n2 = double.parse(output);
-        calculate(operand);
+        //calculate(operand);
+        _output = calculate(operator, n1, n2);
         break;
       default:
         _output = _output + buttonText;
@@ -131,32 +132,34 @@ class _BasicCalculatorState extends State<BasicCalculator> {
     _output = "0";
     n1 = 0;
     n2 = 0;
-    operand = "";
+    operator = "";
   }
 
-  calculate(String operand) {
-    switch (operand) {
+  calculate(String operator, double n1, double n2) {
+    String temp = "0";
+    switch (operator) {
       case "+":
-        _output = (n1 + n2).toString();
+        temp = (n1 + n2).toString();
         break;
       case "-":
-        _output = (n1 - n2).toString();
+        temp = (n1 - n2).toString();
         break;
       case "*":
-        _output = (n1 * n2).toString();
+        temp = (n1 * n2).toString();
         break;
       case "/":
-        _output = (n1 / n2).toString();
+        temp = (n1 / n2).toString();
         break;
     }
     n1 = 0;
     n2 = 0;
-    operand = "";
+    operator = "";
+    return temp;
   }
 
   evaluate(buttonText) {
     n1 = double.parse(output);
-    operand = buttonText;
+    operator = buttonText;
     _output = "0";
   }
 }
