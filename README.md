@@ -1,6 +1,6 @@
-# basiccalculator
+# Basic Calculator
 
-A simple flutter calculator.
+A flutter based calculator for simple calculations. This app does basic calculation and is built using the flutter SDK and with dart programming language so the exactly same code workd for Android as well as IOS.
 
 ## Getting Started
 
