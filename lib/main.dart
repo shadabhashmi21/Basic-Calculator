@@ -131,23 +131,23 @@ class _BasicCalculatorState extends State<BasicCalculator> {
   }
 
   calculate(String _operator, double n1, double n2) {
-    String temp = "0";
+    double temp = 0;
     switch (_operator) {
       case "+":
-        temp = (n1 + n2).toString();
+        temp = (n1 + n2);
         break;
       case "-":
-        temp = (n1 - n2).toString();
+        temp = (n1 - n2);
         break;
       case "*":
-        temp = (n1 * n2).toString();
+        temp = (n1 * n2);
         break;
       case "/":
-        temp = (n1 / n2).toString();
+        temp = (n1 / n2);
         break;
     }
     reset();
-    return temp;
+    return temp.toString();
   }
 
   evaluate(buttonText) {
