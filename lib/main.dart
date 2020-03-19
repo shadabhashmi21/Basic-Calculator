@@ -8,10 +8,12 @@ class BasicCalculator extends StatefulWidget {
 }
 
 class _BasicCalculatorState extends State<BasicCalculator> {
+  ///for storing output during first run, otherwise for storing the value of operand2 i.e. the output in first case
   String output = "0";
+  ///for storing the output every time after first run
   String _output = "0";
-  double n1 = 0;
-  double n2 = 0;
+  double operand1 = 0;
+  double operand2 = 0;
   String operator = "";
 
   buttonPressed(String buttonText) {
@@ -20,20 +22,14 @@ class _BasicCalculatorState extends State<BasicCalculator> {
         reset();
         break;
       case "+":
-        evaluate(buttonText);
-        break;
       case "-":
-        evaluate(buttonText);
-        break;
       case "*":
-        evaluate(buttonText);
-        break;
       case "/":
         evaluate(buttonText);
         break;
       case "=":
-        n2 = double.parse(output);
-        _output = calculate(operator, n1, n2);
+        operand2 = double.parse(output);
+        _output = calculate(operator, operand1, operand2);
         break;
       default:
         _output = _output + buttonText;
@@ -129,14 +125,14 @@ class _BasicCalculatorState extends State<BasicCalculator> {
 
   reset() {
     _output = "0";
-    n1 = 0;
-    n2 = 0;
+    operand1 = 0;
+    operand2 = 0;
     operator = "";
   }
 
-  calculate(String operator, double n1, double n2) {
+  calculate(String _operator, double n1, double n2) {
     String temp = "0";
-    switch (operator) {
+    switch (_operator) {
       case "+":
         temp = (n1 + n2).toString();
         break;
@@ -150,14 +146,12 @@ class _BasicCalculatorState extends State<BasicCalculator> {
         temp = (n1 / n2).toString();
         break;
     }
-    n1 = 0;
-    n2 = 0;
-    operator = "";
+    reset();
     return temp;
   }
 
   evaluate(buttonText) {
-    n1 = double.parse(output);
+    operand1 = double.parse(output);
     operator = buttonText;
     _output = "0";
   }
